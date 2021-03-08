@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-
-const TermsLabel = () => (
-  <span>
-    I agree to <span style={{ color: 'blue' }}>Terms and Conditions</span>
-  </span>
-);
+import { Form, Button, Popover, OverlayTrigger } from 'react-bootstrap';
 
 const SummaryForm = () => {
   const [termsChecked, setTermsChecked] = useState(false);
+
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Content>No ice cream will actually be delivered</Popover.Content>
+    </Popover>
+  );
+
+  const termsLabel = (
+    <span>
+      I agree to
+      <OverlayTrigger placement="right" overlay={popover}>
+        <span style={{ color: 'blue' }}>Terms and Conditions</span>
+      </OverlayTrigger>
+    </span>
+  );
 
   return (
     <Form>
@@ -17,7 +26,7 @@ const SummaryForm = () => {
           <Form.Check
             type={'checkbox'}
             checked={termsChecked}
-            label={<TermsLabel />}
+            label={termsLabel}
             onChange={(e) => setTermsChecked(!termsChecked)}
           />
         </Form.Group>
