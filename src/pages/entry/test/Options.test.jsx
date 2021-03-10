@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Options from '../Options';
 
 describe('Options component', () => {
@@ -12,5 +12,23 @@ describe('Options component', () => {
     // Confirm alt text of images
     const altText = scoopImage.map((element) => element.alt);
     expect(altText).toEqual(['Chocolate scoop', 'Vanilla scoop']);
+  });
+
+  test('Display image for each topping option from the server', async () => {
+    render(<Options optionType={'toppings'} />);
+
+    // Find images 2 images according to mock
+    const toppingImage = await screen.findAllByRole('img', {
+      name: /topping$/i,
+    });
+    expect(toppingImage).toHaveLength(3);
+
+    // Confirm alt text of images
+    const altText = toppingImage.map((element) => element.alt);
+    expect(altText).toEqual([
+      'Cherries topping',
+      'M&Ms topping',
+      'Hot fudge topping',
+    ]);
   });
 });
