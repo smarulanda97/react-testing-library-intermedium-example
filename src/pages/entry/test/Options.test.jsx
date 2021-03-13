@@ -1,5 +1,6 @@
-import { render, screen } from '@testing-library/react';
 import Options from '../Options';
+import { OrderDetailsProvider } from './../../../context/OrderDetail';
+import { render, screen } from './../../../test-utils/testing-library-utils';
 
 describe('Options component', () => {
   test('Display image for each scoop option from the server', async () => {

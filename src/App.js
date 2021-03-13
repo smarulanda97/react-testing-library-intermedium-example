@@ -1,5 +1,17 @@
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import OrderEntry from './pages/entry/OrderEntry';
+import { OrderDetailsProvider } from './context/OrderDetail';
+
 function App() {
-  return <div className="App"></div>;
+  return (
+    <Container>
+      <OrderDetailsProvider>
+        {/* Summary page and entry page need provider */}
+        <OrderEntry />
+      </OrderDetailsProvider>
+    </Container>
+  );
 }
 
 export default App;
