@@ -1,7 +1,11 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import OrderEntry from './../OrderEntry';
 import { rest } from 'msw';
+import OrderEntry from './../OrderEntry';
 import { server } from './../../../mocks/server';
+import {
+  render,
+  screen,
+  waitFor,
+} from './../../../test-utils/testing-library-utils';
 
 describe('OrderEntry component', () => {
   test('Handle error for scoops and toopings routes', async () => {
