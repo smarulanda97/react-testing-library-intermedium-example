@@ -39,9 +39,11 @@ const Options = ({ optionType }) => {
       <Col xs={12}>
         <h2>{title}</h2>
         <p>{formatCurrency(pricePerItem[optionType])} each</p>
-        <p>
-          {title} total: {orderDetails.totals[optionType]}
-        </p>
+        <b>
+          <p className={'text-right my-4'}>
+            {title} total: {orderDetails.totals[optionType]}
+          </p>
+        </b>
       </Col>
       <Col xs={12}>
         <Row>

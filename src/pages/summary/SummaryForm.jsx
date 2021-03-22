@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { Form, Button, Popover, OverlayTrigger } from 'react-bootstrap';
 
-const SummaryForm = () => {
+const SummaryForm = ({ setOrderPhase }) => {
   const [termsChecked, setTermsChecked] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setOrderPhase('completed');
+  };
 
   const popover = (
     <Popover id="popover-basic">
@@ -13,32 +18,28 @@ const SummaryForm = () => {
   const termsLabel = (
     <span>
       I agree to
-      <OverlayTrigger placement="right" overlay={popover}>
-        <span style={{ color: 'blue' }}>Terms and Conditions</span>
+      <OverlayTrigger placement="left" overlay={popover}>
+        <span style={{ color: 'blue' }}> Terms and Conditions</span>
       </OverlayTrigger>
     </span>
   );
 
   return (
-    <Form>
-      <Form.Row>
-        <Form.Group controlId={'terms-and-conditions'}>
-          <Form.Check
-            type={'checkbox'}
-            checked={termsChecked}
-            label={termsLabel}
-            onChange={(e) => setTermsChecked(!termsChecked)}
-          />
-        </Form.Group>
-      </Form.Row>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId={'terms-and-conditions'}>
+        <Form.Check
+          type={'checkbox'}
+          checked={termsChecked}
+          label={termsLabel}
+          onChange={(e) => setTermsChecked(!termsChecked)}
+        />
+      </Form.Group>
 
-      <Form.Row>
-        <Form.Group controlId={'actions'}>
-          <Button variant={'primary'} type={'submit'} disabled={!termsChecked}>
-            Confirm order
-          </Button>
-        </Form.Group>
-      </Form.Row>
+      <Form.Group controlId={'actions'}>
+        <Button variant={'primary'} type={'submit'} disabled={!termsChecked}>
+          Confirm order
+        </Button>
+      </Form.Group>
     </Form>
   );
 };
