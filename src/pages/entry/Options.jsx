@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { Row, Col } from 'react-bootstrap';
 import ScoopOption from './ScoopOption';
+import { Row, Col } from 'react-bootstrap';
 import ToppingOption from './ToppingOption';
+import { formatCurrency } from './../../utils';
 import { pricePerItem } from './../../constants';
 import AlertBanner from './../common/AlertBanner';
 import React, { useEffect, useState } from 'react';
@@ -37,7 +38,7 @@ const Options = ({ optionType }) => {
     <Row>
       <Col xs={12}>
         <h2>{title}</h2>
-        <p>{pricePerItem[optionType]}</p>
+        <p>{formatCurrency(pricePerItem[optionType])} each</p>
         <p>
           {title} total: {orderDetails.totals[optionType]}
         </p>

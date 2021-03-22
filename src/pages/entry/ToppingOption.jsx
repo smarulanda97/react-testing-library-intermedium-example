@@ -1,9 +1,9 @@
 import React from 'react';
-import { Form, Row, Col, Image } from 'react-bootstrap';
+import { Form, Col, Image } from 'react-bootstrap';
 
 const ToppingOption = ({ name, imagePath, updateItemCount }) => {
   const handleChange = (e) => {
-    updateItemCount(name, e.target.value);
+    updateItemCount(name, e.target.checked ? 1 : 0);
   };
 
   return (
@@ -14,21 +14,13 @@ const ToppingOption = ({ name, imagePath, updateItemCount }) => {
         style={{ with: '75%' }}
         src={`http://localhost:3030/${imagePath}`}
       />
-      <Form.Group
-        controlId={`${name}-count`}
-        as={Row}
-        style={{ marginTop: '10px' }}
-      >
-        <Form.Label column xs={6} style={{ textAlign: 'right' }}>
-          {name}
-        </Form.Label>
-        <Col xs={5} style={{ textAlign: 'left' }}>
-          <Form.Control
-            type={'number'}
-            defaultValue={0}
-            onChange={handleChange}
-          />
-        </Col>
+      <Form.Group controlId={`${name}-topping-checkbox`}>
+        <Form.Check
+          label={name}
+          type={'checkbox'}
+          defaultChecked={false}
+          onChange={handleChange}
+        />
       </Form.Group>
     </Col>
   );

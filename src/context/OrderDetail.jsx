@@ -5,15 +5,9 @@ import React, {
   useMemo,
   useEffect,
 } from 'react';
-import { pricePerItem } from './../constants/index';
+import { formatCurrency } from './../utils/index';
 
-function formatCurrency(amount) {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-  }).format(amount);
-}
+import { pricePerItem } from './../constants/index';
 
 const OrderDetails = createContext();
 
