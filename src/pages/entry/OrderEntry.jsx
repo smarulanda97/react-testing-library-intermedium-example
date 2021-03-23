@@ -8,8 +8,8 @@ const OrderEntry = ({ setOrderPhase }) => {
   const [orderDisabled, setOrderDisabled] = useState(true);
 
   useEffect(() => {
-    setOrderDisabled(totals.grandTotal === '$0.00');
-  }, [totals.grandTotal]);
+    setOrderDisabled(totals.scoops === '$0.00');
+  }, [totals.scoops]);
 
   return (
     <>

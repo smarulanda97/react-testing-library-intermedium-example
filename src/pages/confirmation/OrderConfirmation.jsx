@@ -1,9 +1,11 @@
 import axios from 'axios';
-import { Button, Row, Col } from 'react-bootstrap';
+import AlertBanner from './../common/AlertBanner';
 import { useEffect, useState } from 'react';
+import { Button, Row, Col } from 'react-bootstrap';
 import { useOrderDetails } from './../../context/OrderDetail';
 
 const OrderConfirmation = ({ setOrderPhase }) => {
+  const [error, setError] = useState(false);
   const [orderNumber, setOrderNumber] = useState(null);
   const [, , resetOrder] = useOrderDetails();
 
@@ -19,12 +21,12 @@ const OrderConfirmation = ({ setOrderPhase }) => {
     axios
       .post('http://localhost:3030/order')
       .then((response) => setOrderNumber(response.data.orderNumber))
-      .catch((error) => {});
+      .catch((error) => setError(true));
 
     return () => source.cancel();
   }, []);
 
-  return (
+  return !error ? (
     <Row>
       <Col>
         {orderNumber ? (
@@ -39,6 +41,8 @@ const OrderConfirmation = ({ setOrderPhase }) => {
         )}
       </Col>
     </Row>
+  ) : (
+    <AlertBanner />
   );
 };
 

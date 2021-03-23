@@ -5,6 +5,8 @@ import { useOrderDetails } from './../../context/OrderDetail';
 
 const OrderSummary = ({ setOrderPhase }) => {
   const [{ totals, scoops, toppings }] = useOrderDetails();
+  const hasScoops = scoops.size > 0;
+  const hasToppings = toppings.size > 0;
 
   const scoopArray = Array.from(scoops.entries());
   const scoopList = scoopArray.map(([key, value]) => (
@@ -31,7 +33,7 @@ const OrderSummary = ({ setOrderPhase }) => {
       </Row>
       <Row>
         <Col>
-          {scoopList.length && (
+          {hasScoops && (
             <>
               <h2>Scoops: {totals.scoops}</h2>
               <ul style={{ listStyle: 'none' }}>{scoopList}</ul>
@@ -41,7 +43,7 @@ const OrderSummary = ({ setOrderPhase }) => {
       </Row>
       <Row>
         <Col>
-          {toppingList.length && (
+          {hasToppings && (
             <>
               <h2>Toppings: {totals.toppings}</h2>
               <ul style={{ listStyle: 'none' }}>{toppingList}</ul>
